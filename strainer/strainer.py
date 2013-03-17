@@ -7,29 +7,35 @@ Created by: Rui Carmo
 License: MIT (see LICENSE for details)
 """
 
-import os, sys, re, logging
+import os, sys, logging
 
 log = logging.getLogger()
 
 from bs4 import BeautifulSoup
-from collections import defaultdict
 
 import patterns, scorers, cleaners
 
 class Strainer:
-    length_threshold = 25
-    retry_threshold = 250
+    def __init__(self, block_threshold = 25, article_threshold = 250, parser="html5lib"):
+        """Setup defaults"""
+        assert(parser in ["html5lib", "lxml", "html.parser"])
+        self.parser = parser
+        self.block_threshold = block_threshold
+        self.article_threshold = article_threshold
 
     def feed(self, buffer):
-        soup = cleaners.cleanup(BeautifulSoup(cleaners.remove_breaks(buffer), "html5lib"))
+        """Process buffer and extract significant HTML"""
+        soup = cleaners.cleanup(BeautifulSoup(cleaners.remove_breaks(buffer), self.parser))
         aggressive = True
         while True:
             if aggressive: 
                 soup = cleaners.remove_unlikely(soup)
             soup = cleaners.demote_divs(soup)
-            candidates = scorers.text_blocks(soup, self.length_threshold)
+            candidates = scorers.text_blocks(soup, self.block_threshold)
             for i in candidates:
-                log.debug(">>> %f: %s" % (candidates[i]['score'],str(i)[:80].replace('\n',' ')))
+                log.debug(">>> %f: %s" % 
+                    (candidates[i]['score'],
+                    str(i)[:80].replace('\n',' ')))
             best_candidate = scorers.highest(candidates)   
             if best_candidate:
                 result = scorers.extend(best_candidate, candidates)
@@ -38,10 +44,10 @@ class Strainer:
                     aggressive = False
                     continue
                 else:
-                    # fallback and return the original HTML, minimally cleaned up
-                    result = BeautifulSoup(buffer, "html5lib")
+                    # fallback and return original HTML, minimally cleaned up
+                    result = BeautifulSoup(buffer, self.parser)
             clean = scorers.sanitize(result, candidates)
-            if aggressive and not len(str(clean)) >= self.retry_threshold:
+            if aggressive and not len(str(clean)) >= self.article_threshold:
                 aggressive = False
                 continue
             else:
