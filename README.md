@@ -5,7 +5,7 @@ A reimplementation of the Readability algorithm using [BeautifulSoup][bs] and [h
 
 # What does this do?
 
-It takes HTML and scores the markup structure in an attempt to divine which bits are a human-readable article instead of junk. It then rips out the junk and returns clean markup.
+It takes HTML and scores the markup structure in an attempt to divine which bits are a human-readable article instead of junk. It then rips out the junk and returns clean(ish) markup containing the most relevant bits of the page.
 
 # Why another implementation?
 
