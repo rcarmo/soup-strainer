@@ -1,7 +1,7 @@
 soup-strainer
 =============
 
-A reimplementation of the Readability algorithm using BeautifulSoup and html5lib
+A reimplementation of the Readability algorithm using [BeautifulSoup][bs] and [html5lib][h5].
 
 # What does this do?
 
