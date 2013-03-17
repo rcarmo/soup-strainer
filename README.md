@@ -15,7 +15,11 @@ Since I needed a pure Python solution, I decided to take the bits I needed from 
 
 # Didn't BeautifulSoup have trouble parsing bad markup?
 
-BS3 used `SGMLParser`, but BS4 can use both [lxml][lx] _and_ [html5lib][h5]. That not just happens to be available as pure Python but also handles all sorts of corner cases, so now I have the best of both worlds -- I can choose to use [lxml][lx] for speed or [html5lib][h5] for quirky parsing while keeping the ease of use that characterizes [BeautifulSoup][bs].
+[BeautifulSoup][bs] 3.x used `SGMLParser`, which was noticeably brain-dead on occasion, so yes. And that was one of the reasons it was slow, too.
+
+But [BeautifulSoup][bs] 4.x can use both [lxml][lx] _and_ [html5lib][h5], which is pure Python.
+
+Also, [html5lib][h5] handles all sorts of corner cases automatically, so now I have the best of both worlds -- I can choose to use [lxml][lx] for speed or [html5lib][h5] for quirky parsing -- while keeping the ease of use that characterizes [BeautifulSoup][bs].
 
 # Next Steps
 
