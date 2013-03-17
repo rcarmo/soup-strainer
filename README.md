@@ -11,7 +11,7 @@ It takes HTML and scores the markup structure in an attempt to divine which bits
 
 Well, most of the modern Python ports/conversions use [lxml][lx], which is fast and lenient but involves an extra dependency. 
 
-Since I needed a pure Python solution, I decided to take the bits I needed from the [lxml][lx] implementations, re-factor the code to make it easier to maintain, and back-port the whole thing to [BeautifulSoup][bs].
+Since I needed a pure Python solution, I decided to take the bits I needed from the [lxml][lx] implementations, re-factor the code to make it (a lot) easier to maintain, and back-port the whole thing to [BeautifulSoup][bs].
 
 # Didn't BeautifulSoup have trouble parsing bad markup?
 
