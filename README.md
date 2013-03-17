@@ -26,6 +26,14 @@ But [html5lib][h5] handles all sorts of corner cases automatically, so now I hav
 * URL and HREF handling (i.e., toss in an URL and it will fetch the page by itself, normalizing all HREFs afterwards) -- not done yet simply out of laziness, the utility functions are there
 * Multi-page support (i.e., have it bolt on extra markup by divining links) -- a trifle harder
 
+# Other Implementations
+
+* [kwellman's gist](https://gist.github.com/kwellman/632442)
+* [nirmalpatel's](http://nirmalpatel.com/fcgi/hn.py)
+* [Sharmila Gopirajan's decruft](http://code.google.com/p/decruft)
+* [mitechie's breadability](https://github.com/mitechie/breadability)
+* [buriy's python-readability](https://github.com/buriy/python-readability) - slighly better than [gfxmonk's](https://github.com/gfxmonk/python-readability) in my tests
+
 [h5]: http://code.google.com/p/html5lib/
 [bs]: http://www.crummy.com/software/BeautifulSoup/
 [lx]: http://lxml.de
