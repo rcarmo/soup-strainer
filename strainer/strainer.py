@@ -26,6 +26,7 @@ class Strainer:
 
     def feed(self, buffer):
         """Process buffer and extract significant HTML"""
+        buffer = ''.join(line.strip() for line in buffer.split('\n'))
         soup = cleaners.cleanup(BeautifulSoup(cleaners.remove_breaks(buffer), self.parser))
         aggressive = True
         while True:
