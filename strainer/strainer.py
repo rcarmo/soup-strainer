@@ -16,13 +16,14 @@ from bs4 import BeautifulSoup
 import patterns, scorers, cleaners
 
 class Strainer:
-    def __init__(self, add_score = False, block_threshold = 25, article_threshold = 250, parser="html5lib"):
+    def __init__(self, prettify = False, add_score = False, block_threshold = 25, article_threshold = 250, parser="html5lib"):
         """Setup defaults"""
         assert(parser in ["html5lib", "lxml", "html.parser"])
         self.parser = parser
         self.add_score = add_score
         self.block_threshold = block_threshold
         self.article_threshold = article_threshold
+        self.prettify = prettify
 
     def feed(self, buffer):
         """Process buffer and extract significant HTML"""
@@ -53,5 +54,8 @@ class Strainer:
                 aggressive = False
                 continue
             else:
-                return clean.body.contents[0]
+                if self.prettify:
+                    return clean.body.contents[0].prettify()
+                else:
+                    return clean.body.contents[0]
             
