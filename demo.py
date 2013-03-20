@@ -20,7 +20,7 @@ def fetch(url):
 if __name__ == '__main__':
     s = Strainer(add_score = True)
     # the hardest test of all
-    buffer = s.feed(fetch('http://news.nationalgeographic.com/news/2010/09/100916-tyrannosaurs-t-rex-human-size-science-dinosaurs/'))
+    #buffer = s.feed(fetch('http://news.nationalgeographic.com/news/2010/09/100916-tyrannosaurs-t-rex-human-size-science-dinosaurs/'))
     
     # A typical complex page
     #buffer = s.feed(fetch('http://en.wikipedia.org/wiki/Levenshtein_distance'))
@@ -30,5 +30,8 @@ if __name__ == '__main__':
     
     # A page Safari Reader refuses to handle
     #buffer = s.feed(fetch('http://the.taoofmac.com/space/meta/Referrers'))
+
+    # A Portuguese example
+    buffer = s.feed(fetch('http://pplware.sapo.pt/truques-dicas/saiba-como-exportar-as-suas-subscricoes-do-google-reader/'))
     
     print buffer

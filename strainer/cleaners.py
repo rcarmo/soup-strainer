@@ -14,6 +14,12 @@ log = logging.getLogger()
 import patterns
 from bs4.element import Comment
 
+
+def remove_whitespace(buffer):
+    """Removes whitespace from an HTML buffer"""
+    return ''.join(line.strip() for line in buffer.split('\n'))
+
+
 def remove_unlikely(soup):
     """Remove tags that are unlikely to have anything of interest"""
     for el in soup.find_all():
