@@ -24,6 +24,7 @@ But [html5lib][h5] handles all sorts of corner cases automatically, so now I hav
 # Next Steps
 
 * More language hints (Portuguese, German, etc.)
+* Better encoding handling
 * Score tuning to remove some false positives
 * "Learning" (i.e., persistent scoring of successful tag IDs and classes across invocations)
 * URL and HREF handling (i.e., toss in an URL and it will fetch the page by itself, normalizing all HREFs afterwards) -- not done yet simply out of laziness, the utility functions are there
