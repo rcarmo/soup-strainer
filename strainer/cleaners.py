@@ -12,6 +12,7 @@ import os, sys, re, logging, urlparse
 log = logging.getLogger()
 
 import patterns
+from bs4.element import Comment
 
 def remove_unlikely(soup):
     """Remove tags that are unlikely to have anything of interest"""
@@ -43,6 +44,10 @@ def remove_breaks(buffer):
 
 def cleanup(soup):
     """Remove unwanted tags and attributes"""
+    # remove comments
+    comments = soup.findAll(text=lambda text:isinstance(text, Comment))
+    [comment.extract() for comment in comments]
+
     # remove unwanted tags
     for t in patterns.strip_tags:
         for f in soup.find_all(t):
