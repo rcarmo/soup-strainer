@@ -73,7 +73,6 @@ def cleanup(soup):
                         f['class'] = new_class
                     else:
                         del f['class']
-
     return soup
 
 
@@ -81,3 +80,14 @@ def make_links_absolute(soup, url):
     """Prepend base URL to all hrefs"""
     for el in soup.find_all('a', href=True):
         el['href'] = urlparse.urljoin(url, el['href'])
+
+
+def set_encoding(soup):
+    try:
+        import chardet
+    except:
+        return soup
+
+    enc = chardet.detect(soup.get_text())['encoding']
+    soup.encode(enc)
+    return soup
