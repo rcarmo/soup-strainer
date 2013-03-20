@@ -33,6 +33,20 @@ def link_density(el):
     return float(link_length) / max(text_length, 1)
 
 
+def aria(el):
+    """Score element based on ARIA attributes"""
+    score = 0
+
+    for a in patterns.aria_positive:
+        if a in el.attrs:
+            score += 10
+
+    for a in patterns.aria_negative:
+        if a in el.attrs:
+            score -= 20
+    return score
+
+
 def semantic(el):
     """Score element based on attribute values"""  
     score = 0
@@ -53,7 +67,7 @@ def semantic(el):
 
 def singleton(el):
     """Score an individual element"""
-    score = semantic(el)
+    score = semantic(el) + aria(el)
     if el.name in element_bias:
         score += element_bias[el.name]
     return {'score': score, 'el': el}
@@ -125,25 +139,28 @@ def extend(best_candidate, candidates):
     return soup
 
 
-def sanitize(soup, candidates, min_text_length = 25, length_threshold = 25):
+def sanitize(soup, candidates, add_score = False, min_text_length = 25, length_threshold = 25):
     """Remove unnecessary markup with low scores"""
     
     for header in soup.find_all(patterns.headers):
         if semantic(header) < 0 or link_density(header) > 0.33: 
-            del header
+            header.extract()
 
     allowed = {}
     for el in soup.find_all(patterns.text_groups):
         if el in allowed:
             continue
-        weight = semantic(el)
+        weight = semantic(el) + aria(el)
         if el in candidates:
             score = candidates[el]['score']
         else:
             score = 0
 
+        if add_score:
+            el['score'] = score + weight
+
         if weight + score < 0:
-            del el
+            el.extract()
             
         elif len(el.get_text(strip=True).split(",")) < 10:
             counts = {}
@@ -190,7 +207,7 @@ def sanitize(soup, candidates, min_text_length = 25, length_threshold = 25):
                     for subel in el.find_all(patterns.text_groups):
                         allowed[subel] = True
             if strip:
-                del el
+                el.extract()
     return soup
 
 

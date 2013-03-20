@@ -18,7 +18,7 @@ def fetch(url):
     return opener.open(url).read()
 
 if __name__ == '__main__':
-    s = Strainer()
+    s = Strainer(add_score = True)
     # the hardest test of all
     buffer = s.feed(fetch('http://news.nationalgeographic.com/news/2010/09/100916-tyrannosaurs-t-rex-human-size-science-dinosaurs/'))
     

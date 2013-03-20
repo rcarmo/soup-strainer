@@ -16,10 +16,11 @@ from bs4 import BeautifulSoup
 import patterns, scorers, cleaners
 
 class Strainer:
-    def __init__(self, block_threshold = 25, article_threshold = 250, parser="html5lib"):
+    def __init__(self, add_score = False, block_threshold = 25, article_threshold = 250, parser="html5lib"):
         """Setup defaults"""
         assert(parser in ["html5lib", "lxml", "html.parser"])
         self.parser = parser
+        self.add_score = add_score
         self.block_threshold = block_threshold
         self.article_threshold = article_threshold
 
@@ -46,7 +47,7 @@ class Strainer:
                 else:
                     # fallback and return original HTML, minimally cleaned up
                     result = BeautifulSoup(buffer, self.parser)
-            clean = scorers.sanitize(result, candidates)
+            clean = scorers.sanitize(result, candidates, self.add_score)
             if aggressive and not len(str(clean)) >= self.article_threshold:
                 aggressive = False
                 continue

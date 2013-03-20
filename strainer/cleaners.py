@@ -14,7 +14,7 @@ log = logging.getLogger()
 import patterns
 
 def remove_unlikely(soup):
-    """Remove tags that are unlikely to have anything of interes"""
+    """Remove tags that are unlikely to have anything of interest"""
     for el in soup.find_all():
         s = ''
         if 'class' in el.attrs:
@@ -22,7 +22,7 @@ def remove_unlikely(soup):
         if 'id' in el.attrs:
             s += el['id']
         if patterns.unlikely.search(s) and (not patterns.low_potential.search(s)) and el.name != 'body':
-            del el
+            el.extract()
     return soup
     
 
@@ -55,6 +55,14 @@ def cleanup(soup):
                 for s in patterns.strip_attrs:
                     if s.search(a):
                         del f[a]
+            if 'class' in attrs:
+                for s in patterns.strip_classes:
+                    new_class = [c for c in f['class'] if not s.search(c)]
+                    if len(new_class):
+                        f['class'] = new_class
+                    else:
+                        del f['class']
+
     return soup
 
 
