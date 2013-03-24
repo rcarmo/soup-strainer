@@ -57,7 +57,7 @@ class Strainer:
                 continue
             else:
                 if self.prettify:
-                    return clean.body.contents[0].prettify()
+                    return clean.contents[0].prettify()
                 else:
-                    return clean.body.contents[0]
+                    return clean.contents[0]
             

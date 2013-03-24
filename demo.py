@@ -7,7 +7,7 @@ Created by: Rui Carmo
 License: MIT (see LICENSE for details)
 """
 
-import urllib2
+import urllib2, time
 from strainer import Strainer
 
 def fetch(url):
@@ -18,20 +18,35 @@ def fetch(url):
     return opener.open(url).read()
 
 if __name__ == '__main__':
-    s = Strainer(add_score = True)
-    # the hardest test of all
-    #buffer = s.feed(fetch('http://news.nationalgeographic.com/news/2010/09/100916-tyrannosaurs-t-rex-human-size-science-dinosaurs/'))
-    
-    # A typical complex page
-    #buffer = s.feed(fetch('http://en.wikipedia.org/wiki/Levenshtein_distance'))
-    
-    # Some reference material
-    #buffer = s.feed(fetch('http://joevennix.com/2011/05/09/Hacking-Safari-Reader.html'))
-    
-    # A page Safari Reader refuses to handle
-    #buffer = s.feed(fetch('http://the.taoofmac.com/space/meta/Referrers'))
 
-    # A Portuguese example
-    buffer = s.feed(fetch('http://pplware.sapo.pt/truques-dicas/saiba-como-exportar-as-suas-subscricoes-do-google-reader/'))
-    
-    print buffer
+    urls = {
+        # the hardest test of all
+        "natgeo": 'http://news.nationalgeographic.com/news/2010/09/100916-tyrannosaurs-t-rex-human-size-science-dinosaurs/',
+        # A typical complex page
+        "wikipedia": 'http://en.wikipedia.org/wiki/Levenshtein_distance',
+        # Some reference material
+        "blog": 'http://joevennix.com/2011/05/09/Hacking-Safari-Reader.html',
+        # A page Safari Reader refuses to handle
+        "table": 'http://the.taoofmac.com/space/meta/Referrers',
+        # A Portuguese example
+        "pt": 'http://pplware.sapo.pt/truques-dicas/saiba-como-exportar-as-suas-subscricoes-do-google-reader/'
+    }
+
+    raw = {}
+
+    for u in urls:
+        raw[u] = fetch(urls[u])
+
+    for parser in ['html.parser','html5lib','lxml']:
+        s = Strainer(add_score = True, parser=parser)
+        start = time.time()
+        for u in urls:
+            try:
+                buffer = s.feed(raw[u])
+            except Exception, e:
+                print e
+                continue
+            f = open("%s.html" % u, 'w')
+            f.write(str(buffer))
+            f.close()
+        print "%s: %fs" % (parser, time.time()-start)

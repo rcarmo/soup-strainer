@@ -117,7 +117,7 @@ def extend(best_candidate, candidates):
 
     threshold = max([10, best_candidate['score'] * 0.5])
     soup = BeautifulSoup()
-    soup.body.append(best_candidate['el'])
+    soup.append(best_candidate['el'])
     for sibling in best_candidate['el'].parent.children:
         if type(sibling) != Tag or sibling == best_candidate['el']:
             continue
