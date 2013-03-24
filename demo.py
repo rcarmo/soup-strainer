@@ -7,7 +7,7 @@ Created by: Rui Carmo
 License: MIT (see LICENSE for details)
 """
 
-import urllib2, time
+import urllib2, time, codecs
 from strainer import Strainer
 
 def fetch(url):
@@ -27,7 +27,7 @@ if __name__ == '__main__':
         # Some reference material
         "blog": 'http://joevennix.com/2011/05/09/Hacking-Safari-Reader.html',
         # A page Safari Reader refuses to handle
-        "table": 'http://the.taoofmac.com/space/meta/Referrers',
+        "table": 'http://the.taoofmac.com.nyud.net/space/meta/Referrers',
         # A Portuguese example
         "pt": 'http://pplware.sapo.pt/truques-dicas/saiba-como-exportar-as-suas-subscricoes-do-google-reader/'
     }
@@ -46,7 +46,7 @@ if __name__ == '__main__':
             except Exception, e:
                 print e
                 continue
-            f = open("%s.html" % u, 'w')
+            f = codecs.open("%s.html" % u, 'w', encoding="utf-8")
             f.write(str(buffer))
             f.close()
         print "%s: %fs" % (parser, time.time()-start)
