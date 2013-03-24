@@ -7,7 +7,7 @@ Created by: Rui Carmo
 License: MIT (see LICENSE for details)
 """
 
-import urllib2, time, codecs
+import urllib2, time
 from strainer import Strainer
 
 def fetch(url):
@@ -46,7 +46,7 @@ if __name__ == '__main__':
             except Exception, e:
                 print e
                 continue
-            f = codecs.open("%s.html" % u, 'w', encoding="utf-8")
+            f = open("%s.html" % u, 'wb')
             f.write(str(buffer))
             f.close()
         print "%s: %fs" % (parser, time.time()-start)
