@@ -7,16 +7,16 @@ Created by: Rui Carmo
 License: MIT (see LICENSE for details)
 """
 
-cdef bytes remove_whitespace(bytes html)
+cpdef bytes remove_whitespace(bytes html)
 
-cdef object remove_unlikely(object soup)
+cpdef object remove_unlikely(object soup)
     
-cdef object demote_divs(object soup)
+cpdef object demote_divs(object soup)
 
-cdef bytes remove_breaks(bytes html)
+cpdef bytes remove_breaks(bytes html)
 
-cdef object cleanup(object soup)
+cpdef object cleanup(object soup)
 
-cdef void make_links_absolute(object soup, bytes url)
+cpdef make_links_absolute(object soup, bytes url)
 
-cdef object set_encoding(object soup)
+cpdef object set_encoding(object soup)

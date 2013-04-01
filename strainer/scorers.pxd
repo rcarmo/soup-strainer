@@ -8,18 +8,18 @@ License: MIT (see LICENSE for details)
 """
 
 
-cdef float link_density(object el)
+cpdef float link_density(object el)
 
-cdef int aria(object el)
+cpdef int aria(object el)
 
-cdef int semantic(object el)
+cpdef int semantic(object el)
 
-cdef int singleton(object el)
+cpdef int singleton(object el)
 
-cdef object text_blocks(object soup, int min_text_length = ?)
+cpdef object text_blocks(object soup, int min_text_length = ?)
 
-cdef object highest(object candidates)
+cpdef object highest(object candidates)
     
-cdef object extend(object best_candidate, object candidates)
+cpdef object extend(object best_candidate, object candidates)
 
-cdef int levenshtein(bytes a, bytes b)
+cpdef int levenshtein(bytes a, bytes b)
