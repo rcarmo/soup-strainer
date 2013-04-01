@@ -70,7 +70,7 @@ def singleton(el):
     score = semantic(el) + aria(el)
     if el.name in element_bias:
         score += element_bias[el.name]
-    return {'score': score, 'el': el}
+    return score
 
 
 def text_blocks(soup, min_text_length = 25):
@@ -86,17 +86,17 @@ def text_blocks(soup, min_text_length = 25):
             continue
 
         if parent not in candidates:
-            candidates[parent] = singleton(parent)
+            candidates[parent] = {'score': singleton(parent), 'el': parent}
         
         if grandparent is not None and grandparent not in candidates:
-            candidates[grandparent] = singleton(grandparent)
+            candidates[grandparent] = {'score': singleton(grandparent), 'el': grandparent}
 
         score = 1
         score += len(inner_text.split(','))
         score += min([(len(inner_text) / 100), 3])
-        score += singleton(el)['score']
+        score += singleton(el)
         if el not in candidates:
-            candidates[el] = singleton(el) 
+            candidates[el] = {'score':singleton(el), 'el': el}
         candidates[el]['score'] += score
         candidates[parent]['score'] += score
         if grandparent is not None:

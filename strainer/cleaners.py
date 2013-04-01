@@ -15,9 +15,9 @@ import patterns
 from bs4.element import Comment
 
 
-def remove_whitespace(buffer):
+def remove_whitespace(html):
     """Removes whitespace from an HTML buffer"""
-    return ''.join(line.strip() for line in buffer.split('\n'))
+    return ''.join([line.strip() for line in html.split('\n')])
 
 
 def remove_unlikely(soup):
@@ -42,10 +42,10 @@ def demote_divs(soup):
     return soup
 
 
-def remove_breaks(buffer):
+def remove_breaks(html):
     """Remove BR tags and replace them with Ps"""
-    patterns.breaks.sub('</p><p>', buffer)
-    return buffer
+    patterns.breaks.sub('</p><p>', html)
+    return html
     
 
 def cleanup(soup):

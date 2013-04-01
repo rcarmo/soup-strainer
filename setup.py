@@ -43,7 +43,7 @@ def makeExtension(extName):
 
 extNames = scandir("strainer")
 #extNames.extend(scandir("bs4"))
-extNames.extend(scandir("chardet"))
+#extNames.extend(scandir("chardet"))
 extNames.extend(scandir("html5lib"))
 extensions = [makeExtension(name) for name in extNames]
 
