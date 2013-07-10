@@ -49,7 +49,7 @@ extensions = [makeExtension(name) for name in extNames]
 
 setup(
     name = "strainer",
-    packages = "strainer",
+    packages = ["strainer"],
     ext_modules=extensions,
     cmdclass = {'build_ext': build_ext},
 )
