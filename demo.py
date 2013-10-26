@@ -29,7 +29,9 @@ if __name__ == '__main__':
         # A page Safari Reader refuses to handle
         "table": 'http://the.taoofmac.com.nyud.net/space/meta/Referrers',
         # A Portuguese example
-        "pt": 'http://pplware.sapo.pt/truques-dicas/saiba-como-exportar-as-suas-subscricoes-do-google-reader/'
+        "pt": 'http://pplware.sapo.pt/truques-dicas/saiba-como-exportar-as-suas-subscricoes-do-google-reader/',
+        # Dilbert
+        "dilbert": 'http://dilbert.com/strips/comic/2013-06-30/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+DilbertDailyStrip+%28Dilbert+Daily+Strip%29'
     }
 
     raw = {}
