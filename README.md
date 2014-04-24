@@ -36,6 +36,7 @@ But [html5lib][h5] handles all sorts of corner cases automatically, so now I hav
 * [Sharmila Gopirajan's decruft](http://code.google.com/p/decruft)
 * [mitechie's breadability](https://github.com/mitechie/breadability)
 * [buriy's python-readability](https://github.com/buriy/python-readability) - slighly better than [gfxmonk's](https://github.com/gfxmonk/python-readability) in my tests
+* [bndr's node-read](https://github.com/bndr/node-read)
 
 [h5]: http://code.google.com/p/html5lib/
 [bs]: http://www.crummy.com/software/BeautifulSoup/
